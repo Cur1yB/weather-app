@@ -2,13 +2,14 @@
 name = "weather-app"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Cur1yB <alexandr.ignatev1996@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 django = "^5.0.7"
 requests = "^2.32.3"
+djangorestframework = "^3.15.2"
 
 
 [build-system]

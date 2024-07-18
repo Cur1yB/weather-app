@@ -10,6 +10,7 @@
         <button type="submit">send</button>
     </form>
     <a href="{% url 'weather:history_view' %}">look history</a>
+    <a href="{% url 'weather:index' %}">home</a>
     {% if weather %}
             <h2>Weather in {{ city_name }}</h2>
             <ul>
@@ -18,6 +19,7 @@
                 {% endfor %}
             </ul>
     {% endif %}
+    
 {% else %}
         <h1>Go <a href="{% url 'login' %}">login</a></h1>
 {% endif %}

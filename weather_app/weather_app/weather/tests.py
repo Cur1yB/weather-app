@@ -1,8 +1,10 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import SearchHistory
+from .models import SearchHistory, CitySearchCount
 from .forms import CityForm
+from .views import search_counter
+
 
 class WeatherViewsTests(TestCase):
     
@@ -48,3 +50,17 @@ class WeatherViewsTests(TestCase):
         self.assertIn('history', response.context)
         self.assertEqual(len(response.context['history']), 1)
         self.assertEqual(response.context['history'][0].city, 'New York')
+
+
+class CitySearchCountTests(TestCase):
+
+    def test_increment_existing_city(self):
+        CitySearchCount.objects.create(city="New York", search_count=1)
+        search_counter("New York")
+        city_count = CitySearchCount.objects.get(city="New York")
+        self.assertEqual(city_count.search_count, 2)
+
+    def test_increment_new_city(self):
+        search_counter("Krasnoyarsk")
+        city_count = CitySearchCount.objects.get(city="Krasnoyarsk")
+        self.assertEqual(city_count.search_count, 1)

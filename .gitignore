@@ -8,3 +8,4 @@ __pycache__/
 **/migrations/**
 .vscode/
 poetry.lock
+users_for_test.txt

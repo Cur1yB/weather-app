@@ -6,4 +6,4 @@ migrate:
 	python3 weather_app/manage.py migrate
 
 testing:
-	python3 weather_app/manage.py test tests
+	python3 weather_app/manage.py test weather_app.weather.tests
