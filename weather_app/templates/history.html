@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Weather History{% endblock %}
+
+{% block content %}
+<h1>Weather History</h1>
+
+{% if history %}
+    <table>
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>Request Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in history %}
+            <tr>
+                <td>{{ entry.city }}</td>
+                <td>{{ entry.search_date|date:"D, d M Y H:i" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No history available.</p>
+{% endif %}
+<a href="{% url 'weather:weather_show' %}">get weather again</a>
+{% endblock %}

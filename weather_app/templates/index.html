@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}index{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>hello {{ user.username }}</h1>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        <form method="post" action="{% url 'weather:weather_show' %}">
+            {% csrf_token %}
+
+            <button type="submit">
+                Get weather
+            </button>
+        </form>
+    {% else %}
+        <h1>Go <a href="{% url 'login' %}">login</a></h1>
+    {% endif %}
+
+{% endblock %}

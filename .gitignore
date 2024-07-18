@@ -1,0 +1,10 @@
+__pycache__/
+.venv/
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+**/migrations/**
+.vscode/
+poetry.lock

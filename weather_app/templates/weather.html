@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}weather{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <form method="post" action="{% url 'weather:weather_show' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">send</button>
+    </form>
+    <a href="{% url 'weather:history_view' %}">look history</a>
+    {% if weather %}
+            <h2>Weather in {{ city_name }}</h2>
+            <ul>
+                {% for entry in weather %}
+                <li>{{ entry.time|date:"D, d M Y H:i" }} - {{ entry.description }}, {{ entry.temperature }}°C</li>
+                {% endfor %}
+            </ul>
+    {% endif %}
+{% else %}
+        <h1>Go <a href="{% url 'login' %}">login</a></h1>
+{% endif %}
+
+{% endblock %}
