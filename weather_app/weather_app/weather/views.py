@@ -48,12 +48,10 @@ class CitySearchCountAPI(APIView):
     
 
 def search_counter(city):
-    # Попытка обновить существующую запись
     try:
         with transaction.atomic():
             city_count = CitySearchCount.objects.select_for_update().get(city=city)
             city_count.search_count = F('search_count') + 1
             city_count.save()
     except CitySearchCount.DoesNotExist:
-        # Создание новой записи, если запись не существует
         CitySearchCount.objects.create(city=city, search_count=1)
